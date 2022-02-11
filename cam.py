@@ -108,12 +108,12 @@ if __name__ == '__main__':
     target_layers = [model.inception5b.branch4]
 
     image_name = args.image_path
-    image_name = image_name.split('/')[8]
+    image_name = image_name.split('/')[6]
     image_name = image_name.split('.')[0]
     print("IMAGE NAME: " + image_name)
     random_name = random_choice(image_name)
     print("RANDOM NAME: " + random_name)
-    path="./Documents/GitHub/eyeintoai-code/frontend/src/images/samples/"
+    path="./eyeintoai-code/frontend/src/images/samples/"
 
     rand_img = cv2.imread(path+random_name+".jpg", 1)[:, :, ::-1]
     rand_img = np.float32(rand_img) / 255
