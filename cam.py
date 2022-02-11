@@ -214,71 +214,71 @@ if __name__ == '__main__':
     masked_top5 = cv2.bitwise_and(image, image, mask=mask_cv5)
 
     #bottom 10%
-    mask_1 = cam_mask < np.percentile(cam_mask, 10)
-    mask1_img = mask_1.astype(np.uint8)  #convert to an unsigned byte
-    mask1_img*=255
-    mask_cv1 = cv2.cvtColor(mask1_img, cv2.COLOR_BGR2GRAY)
-    masked_bottomm1 = cv2.bitwise_and(image, image, mask=mask_cv1)
+    # mask_1 = cam_mask < np.percentile(cam_mask, 10)
+    # mask1_img = mask_1.astype(np.uint8)  #convert to an unsigned byte
+    # mask1_img*=255
+    # mask_cv1 = cv2.cvtColor(mask1_img, cv2.COLOR_BGR2GRAY)
+    # masked_bottomm1 = cv2.bitwise_and(image, image, mask=mask_cv1)
 
-    #bottom 10% < x < 20%
-    percentile_values = np.percentile(cam_mask, [10,20])
-    greater_than_values = cam_mask >= percentile_values[0]
-    less_than_values = cam_mask < percentile_values[1]
-    mask_2 = np.logical_and(greater_than_values, less_than_values)
-    mask2_img = mask_2.astype(np.uint8)  #convert to an unsigned byte
-    mask2_img*=255
-    mask_cv2 = cv2.cvtColor(mask2_img, cv2.COLOR_BGR2GRAY)
-    masked_bottomm2 = cv2.bitwise_and(image, image, mask=mask_cv2)
+    # #bottom 10% < x < 20%
+    # percentile_values = np.percentile(cam_mask, [10,20])
+    # greater_than_values = cam_mask >= percentile_values[0]
+    # less_than_values = cam_mask < percentile_values[1]
+    # mask_2 = np.logical_and(greater_than_values, less_than_values)
+    # mask2_img = mask_2.astype(np.uint8)  #convert to an unsigned byte
+    # mask2_img*=255
+    # mask_cv2 = cv2.cvtColor(mask2_img, cv2.COLOR_BGR2GRAY)
+    # masked_bottomm2 = cv2.bitwise_and(image, image, mask=mask_cv2)
 
-    #top 20% < x < 30%
-    percentile_values = np.percentile(cam_mask, [20,30])
-    greater_than_values = cam_mask >= percentile_values[0]
-    less_than_values = cam_mask < percentile_values[1]
-    mask_3 = np.logical_and(greater_than_values, less_than_values)
-    mask3_img = mask_3.astype(np.uint8)  #convert to an unsigned byte
-    mask3_img*=255
-    mask_cv3 = cv2.cvtColor(mask3_img, cv2.COLOR_BGR2GRAY)
-    masked_bottomm3 = cv2.bitwise_and(image, image, mask=mask_cv3)
+    # #top 20% < x < 30%
+    # percentile_values = np.percentile(cam_mask, [20,30])
+    # greater_than_values = cam_mask >= percentile_values[0]
+    # less_than_values = cam_mask < percentile_values[1]
+    # mask_3 = np.logical_and(greater_than_values, less_than_values)
+    # mask3_img = mask_3.astype(np.uint8)  #convert to an unsigned byte
+    # mask3_img*=255
+    # mask_cv3 = cv2.cvtColor(mask3_img, cv2.COLOR_BGR2GRAY)
+    # masked_bottomm3 = cv2.bitwise_and(image, image, mask=mask_cv3)
 
-    #top 30% < x < 40%
-    percentile_values = np.percentile(cam_mask, [30,40])
-    greater_than_values = cam_mask >= percentile_values[0]
-    less_than_values = cam_mask < percentile_values[1]
-    mask_4 = np.logical_and(greater_than_values, less_than_values)
-    mask4_img = mask_4.astype(np.uint8)  #convert to an unsigned byte
-    mask4_img*=255
-    mask_cv4 = cv2.cvtColor(mask4_img, cv2.COLOR_BGR2GRAY)
-    masked_bottomm4 = cv2.bitwise_and(image, image, mask=mask_cv4)
+    # #top 30% < x < 40%
+    # percentile_values = np.percentile(cam_mask, [30,40])
+    # greater_than_values = cam_mask >= percentile_values[0]
+    # less_than_values = cam_mask < percentile_values[1]
+    # mask_4 = np.logical_and(greater_than_values, less_than_values)
+    # mask4_img = mask_4.astype(np.uint8)  #convert to an unsigned byte
+    # mask4_img*=255
+    # mask_cv4 = cv2.cvtColor(mask4_img, cv2.COLOR_BGR2GRAY)
+    # masked_bottomm4 = cv2.bitwise_and(image, image, mask=mask_cv4)
 
-    #top 40% < x < 50%
-    percentile_values = np.percentile(cam_mask, [40,50])
-    greater_than_values = cam_mask >= percentile_values[0]
-    less_than_values = cam_mask < percentile_values[1]
-    mask_5 = np.logical_and(greater_than_values, less_than_values)
-    mask5_img = mask_5.astype(np.uint8)  #convert to an unsigned byte
-    mask5_img*=255
-    mask_cv5 = cv2.cvtColor(mask5_img, cv2.COLOR_BGR2GRAY)
-    masked_bottomm5 = cv2.bitwise_and(image, image, mask=mask_cv5)
+    # #top 40% < x < 50%
+    # percentile_values = np.percentile(cam_mask, [40,50])
+    # greater_than_values = cam_mask >= percentile_values[0]
+    # less_than_values = cam_mask < percentile_values[1]
+    # mask_5 = np.logical_and(greater_than_values, less_than_values)
+    # mask5_img = mask_5.astype(np.uint8)  #convert to an unsigned byte
+    # mask5_img*=255
+    # mask_cv5 = cv2.cvtColor(mask5_img, cv2.COLOR_BGR2GRAY)
+    # masked_bottomm5 = cv2.bitwise_and(image, image, mask=mask_cv5)
 
     top1_filename = "./grad_cam_baseline/" + image_name + "_" + random_name + "_top1.jpg"
     top2_filename = "./grad_cam_baseline/" + image_name + "_" + random_name + "_top2.jpg"
     top3_filename = "./grad_cam_baseline/" + image_name + "_" + random_name + "_top3.jpg"
     top4_filename = "./grad_cam_baseline/" + image_name + "_" + random_name + "_top4.jpg"
     top5_filename = "./grad_cam_baseline/" + image_name + "_" + random_name + "_top5.jpg"
-    bottomm1_filename = "./grad_cam_baseline/" + image_name + "_" + random_name + "_bottomm1.jpg"
-    bottomm2_filename = "./grad_cam_baseline/" + image_name + "_" + random_name + "_bottomm2.jpg"
-    bottomm3_filename = "./grad_cam_baseline/" + image_name + "_" + random_name + "_bottomm3.jpg"
-    bottomm4_filename = "./grad_cam_baseline/" + image_name + "_" + random_name + "_bottomm4.jpg"
-    bottomm5_filename = "./grad_cam_baseline/" + image_name + "_" + random_name + "_bottomm5.jpg"
+    # bottomm1_filename = "./grad_cam_baseline/" + image_name + "_" + random_name + "_bottomm1.jpg"
+    # bottomm2_filename = "./grad_cam_baseline/" + image_name + "_" + random_name + "_bottomm2.jpg"
+    # bottomm3_filename = "./grad_cam_baseline/" + image_name + "_" + random_name + "_bottomm3.jpg"
+    # bottomm4_filename = "./grad_cam_baseline/" + image_name + "_" + random_name + "_bottomm4.jpg"
+    # bottomm5_filename = "./grad_cam_baseline/" + image_name + "_" + random_name + "_bottomm5.jpg"
 
     cv2.imwrite(top1_filename, masked_top1)
     cv2.imwrite(top2_filename, masked_top2)
     cv2.imwrite(top3_filename, masked_top3)
     cv2.imwrite(top4_filename, masked_top4)
     cv2.imwrite(top5_filename, masked_top5)
-    cv2.imwrite(bottomm1_filename, masked_bottomm1)
-    cv2.imwrite(bottomm2_filename, masked_bottomm2)
-    cv2.imwrite(bottomm3_filename, masked_bottomm3)
-    cv2.imwrite(bottomm4_filename, masked_bottomm4)
-    cv2.imwrite(bottomm5_filename, masked_bottomm5)
+    # cv2.imwrite(bottomm1_filename, masked_bottomm1)
+    # cv2.imwrite(bottomm2_filename, masked_bottomm2)
+    # cv2.imwrite(bottomm3_filename, masked_bottomm3)
+    # cv2.imwrite(bottomm4_filename, masked_bottomm4)
+    # cv2.imwrite(bottomm5_filename, masked_bottomm5)
     cv2.imwrite('grad_cam.jpg', cam_image)
