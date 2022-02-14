@@ -2,6 +2,7 @@ import argparse
 import cv2
 import numpy as np
 import torch
+import os
 from torchvision import models
 import matplotlib.pyplot as plt
 from pytorch_grad_cam import GradCAM, \
@@ -68,6 +69,16 @@ def get_args():
 
     return args
 
+def convert_to_png(path, file_name, name):
+  src = cv2.imread(file_name, 1)
+  tmp = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)
+  _,alpha = cv2.threshold(tmp,0,255,cv2.THRESH_BINARY)
+  b, g, r = cv2.split(src)
+  rgba = [b,g,r, alpha]
+  dst = cv2.merge(rgba,4)
+  os.remove(file_name)
+  cv2.imwrite(path + name, dst)
+
 
 if __name__ == '__main__':
     """ python cam.py -image-path <path_to_image>
@@ -105,7 +116,7 @@ if __name__ == '__main__':
     # from pytorch_grad_cam.utils.find_layers import find_layer_types_recursive
     # find_layer_types_recursive(model, [torch.nn.ReLU])
     # target_layers = [model.layer4]
-    target_layers = [model.inception5b.branch4]
+    target_layers = [model.inception5b]
 
     image_name = args.image_path
     image_name = image_name.split('/')[6]
@@ -260,16 +271,16 @@ if __name__ == '__main__':
     mask_cv5 = cv2.cvtColor(mask5_img, cv2.COLOR_BGR2GRAY)
     masked_bottom5 = cv2.bitwise_and(image, image, mask=mask_cv5)
 
-    top1_filename = "./grad_cam_baseline/" + image_name + "_" + random_name + "_top1.jpg"
-    top2_filename = "./grad_cam_baseline/" + image_name + "_" + random_name + "_top2.jpg"
-    top3_filename = "./grad_cam_baseline/" + image_name + "_" + random_name + "_top3.jpg"
-    top4_filename = "./grad_cam_baseline/" + image_name + "_" + random_name + "_top4.jpg"
-    top5_filename = "./grad_cam_baseline/" + image_name + "_" + random_name + "_top5.jpg"
-    bottom1_filename = "./grad_cam_baseline/" + image_name + "_" + random_name + "_bottom1.jpg"
-    bottom2_filename = "./grad_cam_baseline/" + image_name + "_" + random_name + "_bottom2.jpg"
-    bottom3_filename = "./grad_cam_baseline/" + image_name + "_" + random_name + "_bottom3.jpg"
-    bottom4_filename = "./grad_cam_baseline/" + image_name + "_" + random_name + "_bottom4.jpg"
-    bottom5_filename = "./grad_cam_baseline/" + image_name + "_" + random_name + "_bottom5.jpg"
+    top1_filename = "./grad_cam_baseline/" + image_name + "/" + image_name + "_" + random_name + "_top1.png"
+    top2_filename = "./grad_cam_baseline/" + image_name + "/" + image_name + "_" + random_name + "_top2.png"
+    top3_filename = "./grad_cam_baseline/" + image_name + "/" + image_name + "_" + random_name + "_top3.png"
+    top4_filename = "./grad_cam_baseline/" + image_name + "/" + image_name + "_" + random_name + "_top4.png"
+    top5_filename = "./grad_cam_baseline/" + image_name + "/" + image_name + "_" + random_name + "_top5.png"
+    bottom1_filename = "./grad_cam_baseline/" + image_name + "/" + image_name + "_" + random_name + "_bottom1.png"
+    bottom2_filename = "./grad_cam_baseline/" + image_name + "/" + image_name + "_" + random_name + "_bottom2.png"
+    bottom3_filename = "./grad_cam_baseline/" + image_name + "/" + image_name + "_" + random_name + "_bottom3.png"
+    bottom4_filename = "./grad_cam_baseline/" + image_name + "/" + image_name + "_" + random_name + "_bottom4.png"
+    bottom5_filename = "./grad_cam_baseline/" + image_name + "/" + image_name + "_" + random_name + "_bottom5.png"
 
     cv2.imwrite(top1_filename, masked_top1)
     cv2.imwrite(top2_filename, masked_top2)
@@ -281,4 +292,15 @@ if __name__ == '__main__':
     cv2.imwrite(bottom3_filename, masked_bottom3)
     cv2.imwrite(bottom4_filename, masked_bottom4)
     cv2.imwrite(bottom5_filename, masked_bottom5)
-    cv2.imwrite('grad_cam.jpg', cam_image)
+    
+    pathname = "./grad_cam_baseline/" + image_name + "/"
+    convert_to_png(pathname, top1_filename, image_name + "_" + random_name + "_top1.png")
+    convert_to_png(pathname, top2_filename, image_name + "_" + random_name + "_top2.png")
+    convert_to_png(pathname, top3_filename, image_name + "_" + random_name + "_top3.png")
+    convert_to_png(pathname, top4_filename, image_name + "_" + random_name + "_top4.png")
+    convert_to_png(pathname, top5_filename, image_name + "_" + random_name + "_top5.png")
+    convert_to_png(pathname, bottom1_filename, image_name + "_" + random_name + "_bottom1.png")
+    convert_to_png(pathname, bottom2_filename, image_name + "_" + random_name + "_bottom2.png")
+    convert_to_png(pathname, bottom3_filename, image_name + "_" + random_name + "_bottom3.png")
+    convert_to_png(pathname, bottom4_filename, image_name + "_" + random_name + "_bottom4.png")
+    convert_to_png(pathname, bottom5_filename, image_name + "_" + random_name + "_bottom5.png")
