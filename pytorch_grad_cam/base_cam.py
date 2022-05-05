@@ -79,6 +79,10 @@ class BaseCAM:
         if self.uses_gradients:
             self.model.zero_grad()
             loss = sum([target(output) for target, output in zip(targets, outputs)])
+            try:
+                loss.requires_grad = True
+            except:
+                print("could not require grad")
             loss.backward(retain_graph=True)
 
         # In most of the saliency attribution papers, the saliency is
