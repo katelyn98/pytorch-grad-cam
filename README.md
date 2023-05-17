@@ -113,7 +113,7 @@ cam = GradCAM(model=model, target_layers=target_layers, use_cuda=args.use_cuda)
 targets = [e.g ClassifierOutputTarget(281)]
 
 # You can also pass aug_smooth=True and eigen_smooth=True, to apply smoothing.
-grayscale_cam = cam(input_tensor=input_tensor, target_category=target_category)
+grayscale_cam = cam(input_tensor=input_tensor, targets=targets)
 
 # In this example grayscale_cam has only one image in the batch:
 grayscale_cam = grayscale_cam[0, :]
@@ -131,15 +131,17 @@ You will have to define objects that you can then pass to the CAM algorithms:
 1. A reshape_transform, that aggregates the layer outputs into 2D tensors that will be displayed.
 2. Model Targets, that define what target do you want to compute the visualizations for, for example a specific category, or a list of bounding boxes.
 
-Here you can find detailed examples of how to use this for Object detection, Semantic Segmentation, and Vision Transformers:
+Here you can find detailed examples of how to use this for various custom use cases like object detection:
 
 - [Notebook tutorial: Class Activation Maps for Object Detection with Faster-RCNN](<tutorials/Class Activation Maps for Object Detection With Faster RCNN.ipynb>)
 
+- [Notebook tutorial: Class Activation Maps for YOLO5](<tutorials/EigenCAM for YOLO5.ipynb>)
+
 - [Notebook tutorial: Class Activation Maps for Semantic Segmentation](<tutorials/Class Activation Maps for Semantic Segmentation.ipynb>)
 
-- [How it works with Vision/SwinT transformers](tutorials/vision_transformers.md)
+- [Notebook tutorial: Adapting pixel attribution methods for embedding outputs from models](<tutorials/Pixel Attribution for embeddings.ipynb>)
 
-*Contribution request for the community: more tutorials for custom use cases, like YOLO object detection, or image captioning.*
+- [How it works with Vision/SwinT transformers](tutorials/vision_transformers.md)
 
 
 ----------
